@@ -8,25 +8,17 @@ const Header = (props) => {
     )
 }
 
-const Feedback = (props) => {
+const Button = (props) => { 
+  console.log(props)
+  const { handleClick, text } = props
   return (
-    <div>
-      <p>
-        {props.feedback} {props.count}
-      </p>
-    </div>
-  )
-}
-
-const Button = (props) => {
-  return (
-    <button onClick={() => props.handleClick(props.feedback + 1)}>
-      {props.text}
+    <button onClick={handleClick}>
+      {text}
     </button>
   )
 }
 
-const Result = (props) => {
+const StatisticLine = (props) => {
   return (
     <div>{props.text} {props.counter}</div>
   )
@@ -36,13 +28,13 @@ const Statistics = (props) => {
   if (props.good + props.neutral + props.bad > 0) {
     return (
       <div>
-        <Result text="Good" counter={props.good} />
-        <Result text="Neutral" counter={props.neutral} />
-        <Result text="Bad" counter={props.bad} />
-        <Result text="All" counter={props.good+props.neutral+props.bad} />
-        <Result text="Average" counter={(props.good*1+props.neutral+props.bad*(-1))/
+        <StatisticLine text="Good" counter={props.good} />
+        <StatisticLine text="Neutral" counter={props.neutral} />
+        <StatisticLine text="Bad" counter={props.bad} />
+        <StatisticLine text="All" counter={props.good+props.neutral+props.bad} />
+        <StatisticLine text="Average" counter={(props.good*1+props.neutral+props.bad*(-1))/
         (props.good+props.neutral+props.bad)} />
-        <Result text="Positive" counter={props.good/(props.good+props.neutral+props.bad)*100}/>
+        <StatisticLine text="Positive" counter={props.good/(props.good+props.neutral+props.bad)*100}/>
       </div>
     )
   } else {
@@ -67,6 +59,7 @@ const App = () => {
       <button onClick={() => setGood(good + 1)}>
         Good
       </button>
+
       <button onClick={() => setNeutral(neutral + 1)}>
         Neutral
       </button>
