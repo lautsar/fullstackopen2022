@@ -32,6 +32,20 @@ const Result = (props) => {
   )
 }
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <Result text="Good" counter={props.good} />
+      <Result text="Neutral" counter={props.neutral} />
+      <Result text="Bad" counter={props.bad} />
+      <Result text="All" counter={props.good+props.neutral+props.bad} />
+      <Result text="Average" counter={(props.good*1+props.neutral+props.bad*(-1))/
+      (props.good+props.neutral+props.bad)} />
+      <Result text="Positive" counter={props.good/(props.good+props.neutral+props.bad)*100}/>
+    </div>
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -54,12 +68,7 @@ const App = () => {
       
       <Header text="Statistics" />
 
-      <Result text="Good" counter={good} />
-      <Result text="Neutral" counter={neutral} />
-      <Result text="Bad" counter={bad} />
-      <Result text="All" counter={good+neutral+bad} />
-      <Result text="Average" counter={(good*1+neutral+bad*(-1))/(good+neutral+bad)} />
-      <Result text="Positive" counter={good/(good+neutral+bad)*100}/>
+      <Statistics good={good} neutral={neutral} bad={bad} />
 
     </div>
   )
