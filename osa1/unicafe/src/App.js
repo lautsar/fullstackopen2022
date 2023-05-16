@@ -33,17 +33,25 @@ const Result = (props) => {
 }
 
 const Statistics = (props) => {
-  return (
-    <div>
-      <Result text="Good" counter={props.good} />
-      <Result text="Neutral" counter={props.neutral} />
-      <Result text="Bad" counter={props.bad} />
-      <Result text="All" counter={props.good+props.neutral+props.bad} />
-      <Result text="Average" counter={(props.good*1+props.neutral+props.bad*(-1))/
-      (props.good+props.neutral+props.bad)} />
-      <Result text="Positive" counter={props.good/(props.good+props.neutral+props.bad)*100}/>
-    </div>
-  )
+  if (props.good + props.neutral + props.bad > 0) {
+    return (
+      <div>
+        <Result text="Good" counter={props.good} />
+        <Result text="Neutral" counter={props.neutral} />
+        <Result text="Bad" counter={props.bad} />
+        <Result text="All" counter={props.good+props.neutral+props.bad} />
+        <Result text="Average" counter={(props.good*1+props.neutral+props.bad*(-1))/
+        (props.good+props.neutral+props.bad)} />
+        <Result text="Positive" counter={props.good/(props.good+props.neutral+props.bad)*100}/>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <p>No feedback</p>
+      </div>
+    )
+  } 
 }
 
 const App = () => {
