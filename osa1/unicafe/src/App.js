@@ -8,15 +8,11 @@ const Header = (props) => {
     )
 }
 
-const Button = (props) => { 
-  console.log(props)
-  const { handleClick, text } = props
-  return (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
-}
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
 
 const StatisticLine = (props) => {
   return (
@@ -52,20 +48,24 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const setToGood = () => {
+    setGood(good+1)
+  }
+  const setToNeutral = () => {
+    setNeutral(neutral+1)
+  }
+  const setToBad = () => {
+    setBad(bad+1)
+  }
+
+
   return (
     <div>
       <Header text="Give feedback" />
 
-      <button onClick={() => setGood(good + 1)}>
-        Good
-      </button>
-
-      <button onClick={() => setNeutral(neutral + 1)}>
-        Neutral
-      </button>
-      <button onClick={() => setBad(bad + 1)}>
-        Bad
-      </button>
+      <Button handleClick={setToGood} text="Good"/>
+      <Button handleClick={setToNeutral} text="Neutral"/>
+      <Button handleClick={setToBad} text="Bad"/>
       
       <Header text="Statistics" />
 
