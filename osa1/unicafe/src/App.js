@@ -57,6 +57,9 @@ const App = () => {
       <Result text="Good" counter={good} />
       <Result text="Neutral" counter={neutral} />
       <Result text="Bad" counter={bad} />
+      <Result text="All" counter={good+neutral+bad} />
+      <Result text="Average" counter={(good*1+neutral+bad*(-1))/(good+neutral+bad)} />
+      <Result text="Positive" counter={good/(good+neutral+bad)*100}/>
 
     </div>
   )
