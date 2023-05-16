@@ -16,7 +16,10 @@ const Button = (props) => (
 
 const StatisticLine = (props) => {
   return (
-    <div>{props.text} {props.counter}</div>
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.counter}</td>
+      </tr>
   )
 }
 
@@ -69,8 +72,9 @@ const App = () => {
       
       <Header text="Statistics" />
 
-      <Statistics good={good} neutral={neutral} bad={bad} />
-
+      <table>
+        <Statistics good={good} neutral={neutral} bad={bad} />
+      </table>
     </div>
   )
 }
