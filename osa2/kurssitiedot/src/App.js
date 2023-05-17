@@ -17,11 +17,17 @@ const Content = (props) => {
   console.log("Content-tyyppi ", typeof contents)
   console.log("Content-keys", Object.keys(contents))
 
+  const total = contents
+  .map(obj => obj.exercises)
+  .reduce((accumulator, current) => accumulator + current, 0)
+
   return (
     <div>
       {contents.map(content=>
       <Part key={content.id} part={content}/>
         )}
+      
+      Total {total} exercises
     </div>
   )
 }
