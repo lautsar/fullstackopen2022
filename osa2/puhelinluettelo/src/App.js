@@ -18,18 +18,27 @@ const App = () => {
     event.preventDefault()
     console.log('Clicked', event.target)
 
-    const nameObject = {
-      name: newName
-    }
+    const existingNames = persons
+    .map(obj => obj.name)
 
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+    if (existingNames.includes(newName)) {
+      alert(newName.concat(" is alredy added"))
+    } else {
+
+      const nameObject = {
+        name: newName
+      }
+
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    }
   }
 
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
   }
+
   return (
     <div>
       <h2>Phonebook</h2>
