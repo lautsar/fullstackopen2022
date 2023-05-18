@@ -17,13 +17,23 @@ const App = () => {
   }, [])
   console.log('render', persons.length, 'persons')
 
-  const Person = (props) => {
+  const Person = ({person, removeName}) => {
     return (
       <div>
-        {props.name} {props.number}
+        {person.name} {person.number}
+        <button onClick={removeName}>Delete</button>
       </div>
     )
-  } 
+  }
+
+  const deleteNameOf = id => {
+
+    if (window.confirm("Delete?")) {
+      setPersons(persons.filter(n => n.id !== id))
+
+      axios.delete('http://localhost:3001/persons/' + id.toString())
+  }
+}
 
   const addName = (event) => {
     event.preventDefault()
@@ -81,7 +91,10 @@ const App = () => {
       <h2>Numbers</h2>
       <div>
       {persons.map(person =>
-        <Person key={person.name} name={person.name} number={person.number}/>
+        <Person
+          key={person.name}
+          person={person}
+          removeName={() => deleteNameOf(person.id)}/>
         )}
       </div>
     </div>

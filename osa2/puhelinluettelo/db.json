@@ -6,11 +6,6 @@
       "id": 1
     },
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "id": 3
@@ -21,18 +16,13 @@
       "id": 4
     },
     {
-      "name": "Kissa",
-      "number": "9384",
-      "id": 5
-    },
-    {
       "name": "Koira",
       "number": "7645",
       "id": 6
     },
     {
-      "name": "Victoria",
-      "number": "733939",
+      "name": "Uusi",
+      "number": "numero",
       "id": 7
     }
   ]
