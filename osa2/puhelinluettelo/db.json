@@ -1,16 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
       "name": "Koira",
       "number": "7645",
       "id": 6
@@ -21,9 +11,19 @@
       "id": 7
     },
     {
-      "name": "Pirjo",
-      "number": "844646",
+      "name": "Santtu",
+      "number": "949383",
       "id": 8
+    },
+    {
+      "name": "Judi Love",
+      "number": "9984373498",
+      "id": 9
+    },
+    {
+      "name": "Sophie Duker",
+      "number": "kfjdslkfjsl",
+      "id": 10
     }
   ]
 }

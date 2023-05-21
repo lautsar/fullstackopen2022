@@ -10,7 +10,7 @@ return (
         removeName={() => deleteNameOf(person.id)}/>
       )}
     </div>
-)
-    }
+  )
+}
 
 export default Persons

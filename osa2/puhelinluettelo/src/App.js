@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
 import PersonForm from './PersonForm'
-import Persons from './Persons'
+import Persons from './components/Persons'
+import Notification from './components/Notification'
 import personService from './services/personService'
+import './index.css'
+
+
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => { 
     console.log('effect')
@@ -28,8 +33,13 @@ const App = () => {
       personService.deleteName(id)
 
     //  axios.delete('http://localhost:3001/persons/' + id.toString())
-  }
+      setMessage("Name has been deleted.")
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+  
 }
+  }
 
   const addName = (event) => {
     event.preventDefault()
@@ -60,6 +70,11 @@ const App = () => {
       setNewNumber('')
 
       console.log(persons)
+
+      setMessage("Name has been added.")
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
   }
 
@@ -80,6 +95,7 @@ const App = () => {
       <h2>Numbers</h2>
         <Persons persons={persons} deleteNameOf={deleteNameOf}/>
 
+        <Notification message={message}></Notification>
     </div>
   )
 
