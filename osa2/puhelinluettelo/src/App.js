@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import PersonForm from './PersonForm'
 import Persons from './Persons'
+import personService from './services/personService'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -10,8 +10,8 @@ const App = () => {
 
   useEffect(() => { 
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+      personService
+      .getAll()
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
@@ -25,7 +25,9 @@ const App = () => {
     if (window.confirm("Delete?")) {
       setPersons(persons.filter(n => n.id !== id))
 
-      axios.delete('http://localhost:3001/persons/' + id.toString())
+      personService.deleteName(id)
+
+    //  axios.delete('http://localhost:3001/persons/' + id.toString())
   }
 }
 
@@ -45,8 +47,10 @@ const App = () => {
         number: newNumber
       }
 
-      axios
-        .post('http://localhost:3001/persons', nameObject)
+//      axios
+//        .post('http://localhost:3001/persons', nameObject)
+      personService
+        .create(nameObject)
         .then(response => {
           console.log(response)
         })

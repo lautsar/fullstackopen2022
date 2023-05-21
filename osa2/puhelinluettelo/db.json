@@ -11,24 +11,19 @@
       "id": 3
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
       "name": "Koira",
       "number": "7645",
       "id": 6
     },
     {
-      "name": "Uusi",
-      "number": "numero",
+      "name": "Miika",
+      "number": "12345",
       "id": 7
     },
     {
-      "name": "Vielä uudempi",
-      "number": "Toimiiko",
-      "id": 9
+      "name": "Pirjo",
+      "number": "844646",
+      "id": 8
     }
   ]
 }
