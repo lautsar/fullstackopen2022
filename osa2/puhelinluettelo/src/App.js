@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import PersonForm from './PersonForm'
+import Persons from './Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -17,14 +19,6 @@ const App = () => {
   }, [])
   console.log('render', persons.length, 'persons')
 
-  const Person = ({person, removeName}) => {
-    return (
-      <div>
-        {person.name} {person.number}
-        <button onClick={removeName}>Delete</button>
-      </div>
-    )
-  }
 
   const deleteNameOf = id => {
 
@@ -77,26 +71,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+        <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
+
       <h2>Numbers</h2>
-      <div>
-      {persons.map(person =>
-        <Person
-          key={person.name}
-          person={person}
-          removeName={() => deleteNameOf(person.id)}/>
-        )}
-      </div>
+        <Persons persons={persons} deleteNameOf={deleteNameOf}/>
+
     </div>
   )
 
