@@ -65,6 +65,43 @@ test('id is called id', async () => {
 
 })
 
+describe ('Post methods', () => {
+    test('amount of blogs increases when new blog is added', async () => {
+        const newBlog = {
+            title: "Uusi blogi",
+            author: "Kirjoittaja",
+            url: "http://osoite.com",
+            likes: 0
+        }
+
+        await api
+        .post('/api/blogs')
+        .send(newBlog)
+
+        const response = await api.get('/api/blogs')
+        expect(response.body).toHaveLength(4)
+    })
+
+    test('added blog can be found', async () => {
+        const newBlog = {
+            title: "Uusi blogi",
+            author: "Kirjoittaja",
+            url: "http://osoite.com",
+            likes: 0
+        }
+
+        await api
+        .post('/api/blogs')
+        .send(newBlog)
+
+        const response = await api.get('/api/blogs')
+        expect(response.body[3].title).toEqual(newBlog.title)
+        expect(response.body[3].author).toEqual(newBlog.author)
+    })
+
+
+})
+
 afterAll(async () => {
     await mongoose.connection.close()
 })
