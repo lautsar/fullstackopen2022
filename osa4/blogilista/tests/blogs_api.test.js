@@ -62,6 +62,7 @@ test('id is called id', async () => {
     const blog = response.body[0]
     expect(blog.id).toBeDefined()
 })
+
 })
 
 afterAll(async () => {
