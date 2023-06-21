@@ -14,15 +14,24 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVote] = useState(Array(8).fill(0))
+  const [mostVoted, setMostVoted] = useState(0)
+  const [mostVotes, setMostVotes] = useState(0)
 
   return (
     <div>
+    <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>Has {votes[selected]} votes</p>
       <button onClick={() => {
         const copy = [...votes]
         copy[selected] += 1
         setVote(copy)
+
+        if (votes[selected] > mostVotes) {
+          setMostVoted(selected)
+          setMostVotes(votes[selected])
+        }
       }}>
         Vote
       </button>
@@ -32,6 +41,12 @@ const App = () => {
       }}>
         New anecdote
       </button>
+    </div>
+    <div>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVoted]}</p>
+      <p>Has {votes[mostVoted]} votes</p>
+    </div>
     </div>
   )
 }
