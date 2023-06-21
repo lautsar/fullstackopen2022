@@ -1,29 +1,31 @@
 import { useState, useEffect } from 'react'
-import PersonForm from './PersonForm'
+import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
+import Filter from './components/Filter'
 import personService from './services/personService'
 import './index.css'
-
+import axios from 'axios'
 
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
+  const [filterWith, setFilter] = useState('')
+  const [showAll, setShowAll] = useState(true)
 
-  useEffect(() => { 
-    console.log('effect')
-      personService
-      .getAll()
+  const personsToShow = showAll
+    ? persons
+    : persons.filter(person => person.name.includes(filterWith))
+
+   useEffect(() => { 
+      personService.getAll()
       .then(response => {
-        console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
-  console.log('render', persons.length, 'persons')
-
 
   const deleteNameOf = id => {
 
@@ -32,18 +34,16 @@ const App = () => {
 
       personService.deleteName(id)
 
-    //  axios.delete('http://localhost:3001/persons/' + id.toString())
       setMessage("Name has been deleted.")
       setTimeout(() => {
         setMessage(null)
       }, 5000)
-  
-}
-  }
+   
+} 
+   }
 
   const addName = (event) => {
     event.preventDefault()
-    console.log('Clicked', event.target)
 
     const existingNames = persons
     .map(obj => obj.name)
@@ -57,8 +57,6 @@ const App = () => {
         number: newNumber
       }
 
-//      axios
-//        .post('http://localhost:3001/persons', nameObject)
       personService
         .create(nameObject)
         .then(response => {
@@ -69,8 +67,6 @@ const App = () => {
       setNewName('')
       setNewNumber('')
 
-      console.log(persons)
-
       setMessage("Name has been added.")
       setTimeout(() => {
         setMessage(null)
@@ -79,7 +75,6 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
@@ -87,13 +82,26 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilter = (event) => {
+    setFilter(event.target.value)
+
+    if (filterWith==='') {
+      setShowAll(true)
+    } else {
+      setShowAll(false)
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+        <Filter handleFilter={handleFilter}/>
+
+      <h2>Add new number</h2>
         <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
 
       <h2>Numbers</h2>
-        <Persons persons={persons} deleteNameOf={deleteNameOf}/>
+        <Persons persons={personsToShow} deleteNameOf={deleteNameOf}/>
 
         <Notification message={message}></Notification>
     </div>
