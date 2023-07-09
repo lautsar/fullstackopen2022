@@ -6,6 +6,18 @@ const App = () => {
   const [countries, setCountries] = useState([])
   const [allCountries, setAllCountries] = useState([])
 
+  const CountryList = () => {
+    if (countries.length > 1) {
+    return (
+      <div>{countries.map(country => <p key={country.name.common}>{country.name.common}</p>)}</div>
+    )
+    } else {
+      return (
+        <div>Jäljellä {countries[0].name.common}</div>
+      )
+    }
+  }
+
   useEffect(() => {
     axios
       .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
@@ -32,7 +44,7 @@ const App = () => {
       </div>
       {countries.length > 10
         ? <p>Too many matches, specify another filter</p>
-        : <div>{countries.map(country => <p key={country.name.common}>{country.name.common}</p>)}</div>
+        : <CountryList />
       }
     </div>
   )
