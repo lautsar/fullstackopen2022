@@ -4,9 +4,6 @@ import Persons from './components/Persons'
 import Notification from './components/Notification'
 import Filter from './components/Filter'
 import personService from './services/personService'
-import './index.css'
-import axios from 'axios'
-
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -17,11 +14,11 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   const personsToShow = showAll
-    ? persons
-    : persons.filter(person => person.name.includes(filterWith))
+  ? persons
+  : persons.filter(person => person.name.includes(filterWith))
 
-   useEffect(() => { 
-      personService.getAll()
+  useEffect(() => { 
+    personService.getAll()
       .then(response => {
         setPersons(response.data)
       })
@@ -38,41 +35,40 @@ const App = () => {
       setTimeout(() => {
         setMessage(null)
       }, 5000)
-   
-} 
-   }
-
-  const addName = (event) => {
-    event.preventDefault()
-
-    const existingNames = persons
-    .map(obj => obj.name)
-
-    if (existingNames.includes(newName)) {
-      alert(`${newName} is already added to phonebook`)
-    } else {
-
-      const nameObject = {
-        name: newName,
-        number: newNumber
-      }
-
-      personService
-        .create(nameObject)
-        .then(response => {
-          console.log(response)
-        })
-      
-      setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
-
-      setMessage("Name has been added.")
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
-    }
   }
+}
+
+const addName = (event) => {
+  event.preventDefault()
+
+  const existingNames = persons
+  .map(obj => obj.name)
+
+  if (existingNames.includes(newName)) {
+    alert(`${newName} is already added to phonebook`)
+  } else {
+
+    const nameObject = {
+      name: newName,
+      number: newNumber
+    }
+
+    personService
+      .create(nameObject)
+      .then(response => {
+        console.log(response)
+      })
+    
+    setPersons(persons.concat(nameObject))
+    setNewName('')
+    setNewNumber('')
+
+    setMessage("Name has been added.")
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
+  }
+}
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -91,6 +87,7 @@ const App = () => {
       setShowAll(false)
     }
   }
+
 
   return (
     <div>
