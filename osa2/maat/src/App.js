@@ -13,9 +13,26 @@ const App = () => {
     )
     } else {
       return (
-        <div>Jäljellä {countries[0].name.common}</div>
+        <Country/>
       )
     }
+  }
+
+  const Country = () => {
+    return (
+      <div>
+        <h1>{countries[0].name.common}</h1>
+        <div>Capital: {countries[0].capital}</div>
+        <div>Area: {countries[0].area}</div>
+        <div><b>Languages: </b>
+        <ul>
+          {Object.values(countries[0].languages).map(language =>
+            <li key={language}>{language}</li>)}
+        </ul>
+        </div>
+        <img src={countries[0].flags.png} alt={countries[0].flags.alt}/>
+      </div>
+    )
   }
 
   useEffect(() => {
